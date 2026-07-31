@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jie Yuan — Aeronautics & Astronautics, University of Southampton</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F7F5;
+    --bg-panel:#FFFFFF;
+    --ink:#14213D;
+    --ink-soft:#4A5568;
+    --gold:#C9974A;
+    --blueprint:#8FA6C4;
+    --dark:#0B1220;
+    --dark-ink:#E7EAF0;
+    --hair:#DDE1E0;
+    --maxw:920px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  a{color:var(--ink); text-decoration:none;}
+  a.underline{border-bottom:1px solid var(--blueprint); padding-bottom:1px;}
+  a.underline:hover{border-color:var(--gold); color:var(--gold);}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  h1,h2,h3{font-family:'Spectral', serif; font-weight:500; margin:0;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(246,247,245,.86);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--hair);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:56px;
+  }
+  nav .mark{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; letter-spacing:.06em; color:var(--ink);
+  }
+  nav .mark b{color:var(--gold); font-weight:500;}
+  nav ul{list-style:none; display:flex; gap:26px; margin:0; padding:0;}
+  nav ul li a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  nav ul li a:hover{color:var(--gold);}
+  @media(max-width:600px){ nav ul{gap:14px;} nav ul li:nth-child(4){display:none;} }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    position:relative;
+    padding:96px 0 72px;
+    overflow:hidden;
+    border-bottom:1px solid var(--hair);
+  }
+  header.hero .grid-bg{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--hair) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hair) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 60% at 70% 30%, black 10%, transparent 70%);
+    opacity:.6;
+  }
+  header.hero .wrap{position:relative;}
+  header.hero .name{
+    font-size:clamp(40px,6vw,64px);
+    line-height:1.05;
+  }
+  header.hero .title-line{
+    margin-top:14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    color:var(--ink-soft);
+    letter-spacing:.02em;
+  }
+  header.hero .tagline{
+    margin-top:26px;
+    max-width:52ch;
+    font-size:17px;
+    color:var(--ink-soft);
+  }
+  header.hero .cta-row{
+    margin-top:34px;
+    display:flex; gap:22px; flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+  }
+
+  /* trajectory svg */
+  .trajectory{
+    position:absolute; right:-40px; top:40px; width:420px; max-width:46vw; opacity:.9;
+  }
+  .trajectory path{
+    fill:none; stroke:var(--blueprint); stroke-width:1.4;
+    stroke-dasharray: 900; stroke-dashoffset:900;
+    animation: draw 2.4s ease forwards .3s;
+  }
+  .trajectory circle.node{ fill:var(--gold); }
+  .trajectory .apogee{
+    opacity:0; animation: fadein .6s ease forwards 2.4s;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  @keyframes fadein{ to{ opacity:1; } }
+  @media (prefers-reduced-motion: reduce){
+    .trajectory path{ animation:none; stroke-dashoffset:0; }
+    .trajectory .apogee{ animation:none; opacity:1; }
+  }
+  @media(max-width:760px){ .trajectory{display:none;} }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding:64px 0; border-bottom:1px solid var(--hair); }
+  section:last-of-type{border-bottom:none;}
+  .section-head{
+    display:flex; align-items:baseline; gap:14px; margin-bottom:34px;
+  }
+  .section-head .num{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--blueprint);
+  }
+  .section-head h2{ font-size:26px; }
+
+  /* About */
+  .about-grid{
+    display:grid; grid-template-columns:1.5fr 1fr; gap:48px; align-items:start;
+  }
+  .about-grid p{ color:var(--ink-soft); margin:0 0 14px; }
+  .portrait{
+    aspect-ratio:4/5;
+    background:var(--bg-panel);
+    border:1px solid var(--hair);
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .portrait img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .portrait .bracket{ position:absolute; width:16px; height:16px; border:2px solid var(--gold); }
+  .portrait .bracket.tl{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
+  .portrait .bracket.tr{ top:-1px; right:-1px; border-left:none; border-bottom:none; }
+  .portrait .bracket.bl{ bottom:-1px; left:-1px; border-right:none; border-top:none; }
+  .portrait .bracket.br{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+  @media(max-width:700px){ .about-grid{grid-template-columns:1fr;} .portrait{max-width:220px;} }
+
+  /* Research */
+  .research-list{ display:grid; gap:0; }
+  .research-item{
+    display:grid; grid-template-columns:100px 1fr; gap:24px;
+    padding:22px 0; border-top:1px solid var(--hair);
+  }
+  .research-item:last-child{ border-bottom:1px solid var(--hair); }
+  .research-item .coord{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold); padding-top:3px;
+  }
+  .research-item h3{ font-size:18px; margin-bottom:6px; }
+  .research-item p{ color:var(--ink-soft); margin:0; font-size:15px; }
+  @media(max-width:600px){ .research-item{grid-template-columns:1fr; gap:6px;} }
+
+  /* Publications */
+  .pub-list{ list-style:none; margin:0; padding:0; }
+  .pub-list li{
+    display:grid; grid-template-columns:64px 1fr; gap:22px;
+    padding:18px 0; border-top:1px solid var(--hair);
+  }
+  .pub-list li:last-child{ border-bottom:1px solid var(--hair); }
+  .pub-year{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink-soft); padding-top:2px; }
+  .pub-title{ font-size:15.5px; }
+  .pub-meta{ font-size:13.5px; color:var(--ink-soft); margin-top:4px; font-style:italic; }
+  @media(max-width:600px){ .pub-list li{grid-template-columns:1fr; gap:4px;} }
+
+  /* Teaching */
+  .course-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px 40px; }
+  .course{ padding:18px 0; border-top:1px solid var(--hair); }
+  .course .code{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold); }
+  .course h3{ font-size:16.5px; margin-top:6px; }
+  .course p{ color:var(--ink-soft); font-size:14px; margin:6px 0 0; }
+  @media(max-width:700px){ .course-grid{grid-template-columns:1fr;} }
+
+  /* Footer / contact */
+  footer{
+    background:var(--dark); color:var(--dark-ink);
+    padding:64px 0 40px;
+  }
+  footer h2{ color:var(--dark-ink); font-size:28px; max-width:16ch; }
+  footer .contact-grid{
+    margin-top:36px;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+  }
+  footer .contact-grid .label{ color:var(--blueprint); font-size:11px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:8px; }
+  footer .contact-grid a{ color:var(--dark-ink); }
+  footer .contact-grid a:hover{ color:var(--gold); }
+  footer .bottom{
+    margin-top:56px; padding-top:20px; border-top:1px solid #26314A;
+    font-family:'IBM Plex Mono', monospace; font-size:11px; color:#8892A6;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+  @media(max-width:700px){ footer .contact-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="mark">JIE YUAN <b>·</b> UNIVERSITY OF SOUTHAMPTON</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="grid-bg"></div>
+  <div class="wrap">
+    <div class="eyebrow">Assistant Professor in Aerospace Design and Optimization</div>
+    <h1 class="name">Jie&nbsp;Yuan</h1>
+    <div class="title-line">Department of Aeronautics &amp; Astronautics — University of Southampton, UK</div>
+    <div class="title-line" style="margin-top:4px; color:var(--gold);">FRAeS · CEng · FHEA</div>
+    <p class="tagline">
+      I work on the nonlinear dynamics of aerospace structures — from friction-damped
+      turbomachinery to composite aeroelastic wings — combining physics-based modelling
+      with data-driven and AI methods to make complex systems easier to design, test, and trust.
+    </p>
+    <div class="cta-row">
+      <span>1163 citations</span><span>·</span><span>h-index 21</span><span>·</span><span>i10-index 31</span>
+    </div>
+    <div class="cta-row" style="margin-top:12px;">
+      <a class="underline" href="#publications">View publications →</a>
+      <a class="underline" href="CV_Jie_Yuan.pdf">Download CV ↓</a>
+      <a class="underline" href="mailto:J.Yuan@soton.ac.uk">J.Yuan@soton.ac.uk</a>
+      <a class="underline" href="https://www.southampton.ac.uk/people/62gh2r/doctor-jie-yuan" target="_blank" rel="noopener">University profile ↗</a>
+    </div>
+  </div>
+
+  <svg class="trajectory" viewBox="0 0 420 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10,280 C90,260 140,120 220,80 C280,52 340,60 400,20" />
+    <circle class="node" cx="10" cy="280" r="4"/>
+    <circle class="node apogee" cx="400" cy="20" r="4"/>
+  </svg>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head"><span class="num">01</span><h2>About</h2></div>
+    <div class="about-grid">
+      <div>
+        <p>
+          I am an Assistant Professor in Aerospace Design and Optimization at the University
+          of Southampton. I obtained my PhD in aerospace structures from the Rolls-Royce
+          Composite UTC at the University of Bristol (2016), followed by a Research Fellowship
+          in computational vibration at the Vibration UTC, Imperial College London
+          (2017–2020), and a Lectureship in Aerospace Structures at the University of
+          Strathclyde (2020–2023). Before that, I worked as a research engineer in robust
+          aircraft design at Airbus UK (2015–2017).
+        </p>
+        <p>
+          My research develops robust computational methods for the design and optimisation
+          of complex, large-scale nonlinear aerospace systems — spanning nonlinear structural
+          dynamics, dynamic control using novel functional materials and interfaces, and
+          non-deterministic approaches for robust optimisation and identification. I hold a
+          Research Fellowship from the Royal Academy of Engineering / Leverhulme Trust, and am
+          a Fellow of the Royal Aeronautical Society, a Fellow of the Higher Education
+          Academy, and a Chartered Engineer. I am currently accepting applications from
+          prospective PhD students.
+        </p>
+      </div>
+      <div class="portrait">
+        <span class="bracket tl"></span><span class="bracket tr"></span>
+        <span class="bracket bl"></span><span class="bracket br"></span>
+        <img src="https://www.southampton.ac.uk/sites/default/files/styles/max_1300x1300/public/staff/jy2y23-114602.jpg.webp?h=2bd99c65&itok=apNFa6EQ" alt="Portrait of Dr Jie Yuan">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <div class="section-head"><span class="num">02</span><h2>Research</h2></div>
+    <div class="research-list">
+      <div class="research-item">
+        <div class="coord">AREA·01</div>
+        <div>
+          <h3>Computational Methods for Nonlinear Dynamical Systems</h3>
+          <p>Reduced-order models and computational methods for large-scale nonlinear dynamical systems — including friction-damped turbomachinery, mistuned bladed discs, and jointed structures with contact interfaces.</p>
+        </div>
+      </div>
+      <div class="research-item">
+        <div class="coord">AREA·02</div>
+        <div>
+          <h3>Dynamic Control via Functional Materials &amp; Interfaces</h3>
+          <p>Dynamic control using novel functional materials and interfaces, including friction interface design, cellular/Kirigami structures, and aeroelastic tailoring of composite wings.</p>
+        </div>
+      </div>
+      <div class="research-item">
+        <div class="coord">AREA·03</div>
+        <div>
+          <h3>Robust Optimisation &amp; Identification</h3>
+          <p>Non-deterministic approaches — Bayesian inference, uncertainty quantification, and AI-assisted methods — for robust optimisation and identification of complex aerospace systems.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <div class="section-head"><span class="num">03</span><h2>Publications</h2></div>
+    <ul class="pub-list">
+      <li>
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a class="underline" href="https://eprints.soton.ac.uk/cgi/eprintbypureuuid?uuid=703ba9b6-2185-476e-bced-0ca7bf2775f4" target="_blank" rel="noopener">Nonlinear modal analysis of turbomachinery blade attachments: effects of interface edge radius, manufacturing variability and fretting wear</a></div>
+          <div class="pub-meta">Yuan, J., Toal, D., &amp; Salles, L. — <em>Conference paper</em></div>
+        </div>
+      </li>
+      <li>
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a class="underline" href="https://doi.org/10.1016/j.ijnonlinmec.2026.105419" target="_blank" rel="noopener">Passive control through surface roughness of local stability boundaries for friction-induced vibration</a></div>
+          <div class="pub-meta">Algara, A., Cabboi, A., &amp; Yuan, J. — <em>International Journal of Non-Linear Mechanics</em></div>
+        </div>
+      </li>
+      <li>
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title">CNN-assisted robust design of an intentionally mistuned frictional damper for bladed-disk systems</div>
+          <div class="pub-meta">Wang, P., Toal, D., &amp; Yuan, J. — <em>ASME Journal of Turbomachinery</em> (accepted)</div>
+        </div>
+      </li>
+      <li>
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title"><a class="underline" href="https://doi.org/10.1017/aer.2025.10073" target="_blank" rel="noopener">Analysis and optimisation of cellular Kirigami wingbox (CKW) structures for enhanced aeroelastic performance</a></div>
+          <div class="pub-meta">Huang, M., Yuan, J., Leitch, H., &amp; Scarpa, F. — <em>The Aeronautical Journal</em></div>
+        </div>
+      </li>
+      <li>
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title"><a class="underline" href="https://doi.org/10.1007/s11071-025-11065-8" target="_blank" rel="noopener">Prediction and validation of aeroelastic limit cycle oscillations using harmonic balance methods and Koopman operator</a></div>
+          <div class="pub-meta">McGurk, M., &amp; Yuan, J. — <em>Nonlinear Dynamics</em></div>
+        </div>
+      </li>
+      <li>
+        <div class="pub-year">2024</div>
+        <div>
+          <div class="pub-title"><a class="underline" href="https://doi.org/10.1016/j.paerosci.2024.101018" target="_blank" rel="noopener">Friction damping for turbomachinery: a comprehensive review of modelling, design strategies, and testing capabilities</a></div>
+          <div class="pub-meta">Yuan, J., Gastaldi, C., Denimal Goy, E., &amp; Chouvion, B. — <em>Progress in Aerospace Sciences</em></div>
+        </div>
+      </li>
+      <li>
+        <div class="pub-year">2024</div>
+        <div>
+          <div class="pub-title"><a class="underline" href="https://doi.org/10.2514/1.J063611" target="_blank" rel="noopener">Data-driven Bayesian inference for stochastic model identification of nonlinear aeroelastic systems</a></div>
+          <div class="pub-meta">McGurk, M., Lye, A., Renson, L., &amp; Yuan, J. — <em>AIAA Journal</em></div>
+        </div>
+      </li>
+      <li>
+        <div class="pub-year">2023</div>
+        <div>
+          <div class="pub-title"><a class="underline" href="https://doi.org/10.1016/j.ymssp.2022.109952" target="_blank" rel="noopener">Influence of mesoscale friction interface geometry on the nonlinear dynamic response of large assembled structures</a></div>
+          <div class="pub-meta">Yuan, J., Salles, L., Nowell, D., &amp; Schwingshackl, C. — <em>Mechanical Systems and Signal Processing</em></div>
+        </div>
+      </li>
+    </ul>
+    <p style="margin-top:28px;">
+      <a class="underline" href="https://www.southampton.ac.uk/people/62gh2r/doctor-jie-yuan#publications" target="_blank" rel="noopener" style="font-family:'IBM Plex Mono',monospace; font-size:13px;">Full list (66 publications) on Southampton profile →</a>
+    </p>
+  </div>
+</section>
+
+<section id="teaching">
+  <div class="wrap">
+    <div class="section-head"><span class="num">04</span><h2>Teaching</h2></div>
+    <div class="course-grid">
+      <div class="course">
+        <div class="code">UNDERGRADUATE</div>
+        <h3>Digital Aerospace</h3>
+        <p>Lecturer &amp; co-module lead · University of Southampton · 2024–present · ~250 students</p>
+      </div>
+      <div class="course">
+        <div class="code">POSTGRADUATE</div>
+        <h3>Statics and Dynamics</h3>
+        <p>Lab lead · University of Southampton · 2024–present · ~250 students</p>
+      </div>
+      <div class="course">
+        <div class="code">POSTGRADUATE</div>
+        <h3>Aeroelasticity</h3>
+        <p>Lecturer · University of Southampton · 2025–present · ~20 students</p>
+      </div>
+      <div class="course">
+        <div class="code">UNDERGRADUATE</div>
+        <h3>Aerospace Propulsion</h3>
+        <p>Lecturer &amp; module lead · University of Strathclyde · 2020–2023 · ~120 students</p>
+      </div>
+      <div class="course">
+        <div class="code">UNDERGRADUATE</div>
+        <h3>Aero Design 1</h3>
+        <p>Lecturer · University of Strathclyde · 2020–2023 · ~150 students</p>
+      </div>
+      <div class="course">
+        <div class="code">PROGRAMME</div>
+        <h3>MSc Advanced Mechanical Engineering</h3>
+        <p>Programme Director · University of Strathclyde · 2020–2023 · ~40 students</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Get in touch</div>
+    <h2>Open to collaborations, visiting students, and speaking invitations.</h2>
+    <div class="contact-grid">
+      <div>
+        <div class="label">Email</div>
+        <a href="mailto:J.Yuan@soton.ac.uk">J.Yuan@soton.ac.uk</a>
+      </div>
+      <div>
+        <div class="label">Office</div>
+        <a href="https://www.southampton.ac.uk/about/faculties-schools-departments/school-of-engineering" target="_blank" rel="noopener">Department of Aeronautics &amp; Astronautics<br>University of Southampton, UK</a>
+      </div>
+      <div>
+        <div class="label">Elsewhere</div>
+        <a href="https://www.southampton.ac.uk/people/62gh2r/doctor-jie-yuan" target="_blank" rel="noopener">Southampton profile</a><br>
+        <a href="https://orcid.org/0000-0002-2411-8789" target="_blank" rel="noopener">ORCID</a><br>
+        <a href="https://www.linkedin.com/in/jie-yuan-ph-d-ceng-fhea-abb29a60/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Jie Yuan</span>
+      <span>Department of Aeronautics &amp; Astronautics, University of Southampton</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
