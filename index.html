@@ -71,7 +71,7 @@
     color:var(--ink-soft);
   }
   nav ul li a:hover{color:var(--gold);}
-  @media(max-width:600px){ nav ul{gap:14px;} nav ul li:nth-child(4){display:none;} }
+  @media(max-width:680px){ nav ul{gap:12px;} nav ul li:nth-child(4){display:none;} }
 
   /* ---------- HERO ---------- */
   header.hero{
@@ -205,7 +205,27 @@
   .course p{ color:var(--ink-soft); font-size:14px; margin:6px 0 0; }
   @media(max-width:700px){ .course-grid{grid-template-columns:1fr;} }
 
-  /* Footer / contact */
+  /* Students */
+  .student-group-label{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--blueprint); margin:0 0 4px;
+  }
+  .student-list{ margin-bottom:40px; }
+  .student-list:last-child{ margin-bottom:0; }
+  .student-item{
+    display:grid; grid-template-columns:200px 1fr 90px; gap:20px;
+    padding:18px 0; border-top:1px solid var(--hair); align-items:baseline;
+  }
+  .student-item:last-child{ border-bottom:1px solid var(--hair); }
+  .student-item .s-name{ font-size:15.5px; font-weight:500; }
+  .student-item .s-role{ display:block; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--gold); margin-top:3px; text-transform:uppercase; letter-spacing:.06em; }
+  .student-item .s-project{ font-size:14.5px; color:var(--ink-soft); }
+  .student-item .s-years{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft); text-align:right; }
+  @media(max-width:700px){
+    .student-item{ grid-template-columns:1fr; gap:4px; }
+    .student-item .s-years{ text-align:left; }
+  }
+
   footer{
     background:var(--dark); color:var(--dark-ink);
     padding:64px 0 40px;
@@ -237,6 +257,7 @@
       <li><a href="#research">Research</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#students">Students</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -438,6 +459,66 @@
         <p>Programme Director · University of Strathclyde · 2020–2023 · ~40 students</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="students">
+  <div class="wrap">
+    <div class="section-head"><span class="num">05</span><h2>PhD Students &amp; Projects</h2></div>
+
+    <div class="student-list">
+      <div class="student-group-label">Current</div>
+      <div class="student-item">
+        <div class="s-name">Mingzhi Huang<span class="s-role">Main supervisor</span></div>
+        <div class="s-project">Design and optimisation of nature-inspired architected structures for passive dynamic control</div>
+        <div class="s-years">2025–</div>
+      </div>
+      <div class="student-item">
+        <div class="s-name">Giovanna Vilela<span class="s-role">Main supervisor</span></div>
+        <div class="s-project">AI-assisted robust aero-engine structural analysis due to fan blade-off</div>
+        <div class="s-years">2025–</div>
+      </div>
+      <div class="student-item">
+        <div class="s-name">Peiyu Wang<span class="s-role">Main supervisor</span></div>
+        <div class="s-project">Robust data-driven modelling for complex nonlinear and high-dimensional dynamic systems</div>
+        <div class="s-years">2024–</div>
+      </div>
+      <div class="student-item">
+        <div class="s-name">Thomas Tsing<span class="s-role">Co-supervisor</span></div>
+        <div class="s-project">Convolutional generative adversarial networks for rapid engineering design</div>
+        <div class="s-years">2024–</div>
+      </div>
+      <div class="student-item">
+        <div class="s-name">Ahmad Algara<span class="s-role">Main supervisor</span></div>
+        <div class="s-project">Multi-scale modelling for friction-induced vibration systems</div>
+        <div class="s-years">2022–</div>
+      </div>
+      <div class="student-item">
+        <div class="s-name">Harry Leitch<span class="s-role">Main supervisor</span></div>
+        <div class="s-project">Robust optimisation of tow-steered composites for aerospace applications</div>
+        <div class="s-years">2022–</div>
+      </div>
+    </div>
+
+    <div class="student-list">
+      <div class="student-group-label">Completed</div>
+      <div class="student-item">
+        <div class="s-name">Dr Michael McGurk<span class="s-role">Main supervisor</span></div>
+        <div class="s-project">A robust data-driven Bayesian approach for complex nonlinear aeroelastic system identification</div>
+        <div class="s-years">2021–2025</div>
+      </div>
+      <div class="student-item">
+        <div class="s-name">Dr Yekai Sun<span class="s-role">Co-supervisor · Imperial College London</span></div>
+        <div class="s-project">Nonlinear modal analysis for blisks with friction dampers</div>
+        <div class="s-years">2017–2021</div>
+      </div>
+    </div>
+
+    <p style="margin-top:32px; font-size:15px; color:var(--ink-soft);">
+      I am currently accepting applications from prospective PhD students working in nonlinear
+      structural dynamics, friction and contact mechanics, or data-driven methods for aerospace
+      systems — please <a class="underline" href="mailto:J.Yuan@soton.ac.uk">get in touch</a>.
+    </p>
   </div>
 </section>
 
